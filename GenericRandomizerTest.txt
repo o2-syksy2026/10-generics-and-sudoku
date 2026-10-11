@@ -1,0 +1,77 @@
+package randomizer;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * This class will not compile until the methods in the Randomizer class have
+ * been made generic.
+ *
+ * The purpose of this class is to test that the methods work with any type of
+ * objects, not just strings. This class does not focus on the randomness of the
+ * results, as that is already tested in RandomizerTest. Instead, this class
+ * verifies that the methods work with any type of objects.
+ */
+public class GenericRandomizerTest {
+
+    // Two randomizers of different types to be used in the test methods
+    private Randomizer<Integer> numberRandomizer = new Randomizer<>();
+    private Randomizer<Hero> heroRandomizer = new Randomizer<>();
+
+    /**
+     * The Hero record class is used to verify your generic methods works with any
+     * type of objects. Heroes just have names, which are strings.
+     */
+    record Hero(String name) {
+    }
+
+    // Our test lists, which contain both numbers and objects:
+    private List<Integer> numbers = List.of(100, 42, -1, 7, 10);
+    private List<Hero> heroes = List.of(
+            new Hero("Chase"), new Hero("Marshall"), new Hero("Skye"),
+            new Hero("Rocky"), new Hero("Zuma"), new Hero("Rubble"));
+
+    @Test
+    void getRandomWorksWithIntegersAndObjects() {
+        Integer number = numberRandomizer.getRandom(numbers);
+        assertTrue(numbers.contains(number));
+
+        Hero hero = heroRandomizer.getRandom(heroes);
+        assertTrue(heroes.contains(hero));
+    }
+
+    @Test
+    void shuffleCanShuffleAnyTypesOfObjects() {
+        Randomizer<Integer> numberRandomizer = new Randomizer<>();
+        ArrayList<Integer> shuffledNumbers = new ArrayList<>(numbers);
+        numberRandomizer.shuffle(shuffledNumbers);
+        RandomizerTest.assertContentsEqual(numbers, shuffledNumbers);
+
+        ArrayList<Hero> shuffledHeroes = new ArrayList<>(heroes);
+        heroRandomizer.shuffle(shuffledHeroes);
+        RandomizerTest.assertContentsEqual(heroes, shuffledHeroes);
+    }
+
+    @Test
+    void getShuffledReturnedShuffledCopiesOfLists() {
+        List<Integer> shuffledNumbers = numberRandomizer.getShuffled(numbers);
+        RandomizerTest.assertContentsEqual(numbers, shuffledNumbers);
+
+        List<Hero> shuffledHeroes = heroRandomizer.getShuffled(heroes);
+        RandomizerTest.assertContentsEqual(heroes, shuffledHeroes);
+    }
+
+    @Test
+    void getRandomSampleReturnsRandomSubsetsOfLists() {
+        List<Integer> numberSample = numberRandomizer.getRandomSample(numbers, 2);
+        assertEquals(2, numberSample.size());
+
+        List<Hero> heroSample = heroRandomizer.getRandomSample(heroes, 4);
+        assertEquals(4, heroSample.size());
+    }
+}
