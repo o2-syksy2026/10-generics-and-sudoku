@@ -12,10 +12,10 @@ Tehtävä koostuu useammasta osasta, jotka arvioidaan erikseen hyödyntäen valm
 
 ## Tehtävän aloittaminen
 
-Aloita kloonaamalla Git-repositorio omalle koneellesi. Harjoitus täytyy tehdä omassa kopiossasi, eli varmista, että repositorion osoitteessa on mukana oma GitHub-käyttäjätunnuksesi! Oman kopiosi saat tekemällä tästä repositoriosta forkin tai kopion omalle GitHub-tilillesi.
+Forkkaa ensin tämä repositorio omaan GitHub-repositorioosi GitHubin **Fork**-painikkeella. Harjoitus tehdään omassa forkissasi, joten kloonaa vasta sitten oma forkkisi omalle koneellesi (osoitteessa on oma GitHub-käyttäjätunnuksesi):
 
 ```sh
-git clone https://github.com/varmista-etta-github-tunnuksesi-on-repositorion-osoitteessa.git
+git clone https://github.com/<oma-github-tunnuksesi>/<repositorion-nimi>.git
 ```
 
 Kloonattuasi projektin omalle koneellesi, avaa se koodieditorissasi.
